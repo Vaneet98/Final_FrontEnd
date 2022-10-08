@@ -14,7 +14,7 @@ import { useNavigate, Link } from "react-router-dom";
 // React Table
 import DataTable from "react-data-table-component";
 
-
+import Form from "react-bootstrap/Form";
 
 
 
@@ -30,10 +30,10 @@ const Employee = () => {
 
 
 
-  const [isBlocked, setIsBlocked] = useState("");
+  const [Isblocked, setIsBlocked] = useState("");
   const [countries, setCountries] = useState([]);
   const [filtercountries, setFiltercountries] = useState([]);
-  console.log(isBlocked);
+  console.log("This is blocked@@@@@@@@@@@@@@@@@@@@2",Isblocked);
 
   // PAGINATION
   const paginationComponentOptions = {
@@ -68,7 +68,7 @@ const Employee = () => {
 
   async function deleteUser(){
     let id = localStorage.getItem("id");
-    await fetch(`http://localhost:4001/api/delete/${id}`,{
+    await fetch(`http://localhost:4002/user/delete/${id}`,{
       method:"DELETE"
     }).then((result)=>{
       result.json().then((resq)=>{
@@ -82,7 +82,12 @@ const Employee = () => {
 
   useEffect(() => {
     preload();
-  }, [isBlocked]);
+  }, [Isblocked]);
+  
+  function handleSelect(e) {
+    setIsBlocked(e.target.value);
+  }
+
   async function block(id){
     await fetch(`http://localhost:4002/user/block/${id}`,{
       method:"PUT"
@@ -228,10 +233,11 @@ const Employee = () => {
             {" "}
             <i className="fa-solid fa-pen fa-lg"style={{color:"blue",backgroundColor:"white"}}></i>
           </button> 
-          <button onClick={() => handleShow(row.id)} style={{ border: "none" }}> <i  className="fa-regular fa-trash-can fa-lg" style={{color:"red"}}></i></button>
+          <button onClick={() => handleShow(row.id)} style={{ border: "none" }}> <i  className="fa-regular fa-trash-can fa-lg" style={{color:"red"}}></i> </button>
           <button onClick={ ()=>block(row.id)} style={{ border: "none",backgroundColor:"white" }}>
-            {row.Isblocked?<i className="fa-sharp fa-solid fa-lock"style={{color:"green",fontSize:"20px"}}></i>:<i className="fa-solid fa-lock-open"style={{fontSize:"20px"}}></i> }   
+            {row.Isblocked? <i className="fa-sharp fa-solid fa-lock"style={{color:"green",fontSize:"20px"}}></i>:<i className="fa-solid fa-lock-open"style={{fontSize:"20px"}}></i> }   
             </button>
+
         </div>
       ), 
     },
@@ -270,7 +276,7 @@ const Employee = () => {
           highlightOnHover
           subHeader
           subHeaderComponent={
-            
+            <>
               <input
               type="text"
               placeholder="Search here"
@@ -282,7 +288,20 @@ const Employee = () => {
               //   width: "200px",
               // }}
             />
-             
+             <Form style={{ float: "left" }}>
+                <Form.Label>Filter</Form.Label>
+                <Form.Select
+                  id="select"
+                  name="Isblocked"
+                  value={Isblocked}
+                  onChange={handleSelect}
+                >
+                  <option value="">All</option>
+                  <option value="1">Blocked</option>
+                  <option value="0">Un-Blocked</option>
+                </Form.Select>
+              </Form>
+             </>
           }
         />
            <Modal show={show} onHide={handleClose}>
