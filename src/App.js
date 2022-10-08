@@ -44,6 +44,15 @@ import AddEmployeePage from "./pages/Employee/AddEmployeePage";
 import AddEmployeePage2 from "./pages/Employee/AddEmployeePage2";
 
 import Employee from "./components/Table/Employee";
+import SalaryBlock from "./components/Table/Salary/SalaryBlock";
+import SalaryUnblock from "./components/Table/Salary/SalaryUnblock";
+import SalaryLevel1 from "./components/Table/department/SalaryLevel1";
+import SalaryLevel2 from "./components/Table/department/SalaryLevel2";
+import SalaryLevel4 from "./components/Table/department/SalaryLevel4";
+import SalaryLevel5 from "./components/Table/department/SalaryLevel5";
+import SalaryLevel3 from "./components/Table/department/SalaryLevel3";
+import Block from "./components/Table/Qualifiaction/Block";
+import Unblock from "./components/Table/Qualifiaction/Unblock";
 //  import { useCookies } from "react-cookie";
 function App() {
   // const [cookies, setCookie] = useCookies(["user"]);
@@ -92,6 +101,22 @@ function App() {
         />
         <Route path="/addEmployee2" element={<AddEmployeePage2 />} />
         <Route path="/Employee" element={<Protected Cmp={Employee} />} />
+
+
+        <Route path="/SalaryBlock" element={<Protected Cmp={SalaryBlock} />} />
+        <Route path="/SalaryUnblock" element={<Protected Cmp={SalaryUnblock} />} />
+
+
+        <Route path="/SalaryLevel1" element={<Protected Cmp={SalaryLevel1} />} />
+        <Route path="/Salarylevel2" element={<Protected Cmp={SalaryLevel2} />} />
+        <Route path="/Salarylevel3" element={<Protected Cmp={SalaryLevel3} />} />
+        <Route path="/Salarylevel4" element={<Protected Cmp={SalaryLevel4} />} />
+        <Route path="/Salarylevel5" element={<Protected Cmp={SalaryLevel5} />} />
+
+
+
+        <Route path="/QualificationBlock" element={<Protected Cmp={Block} />} />
+        <Route path="/QualificationUnBlock" element={<Protected Cmp={Unblock} />} />
 
  {/* <Route path="/addAdmin" element={<Protected Cmp= {Dashboard} />} /> */}
 {/* 

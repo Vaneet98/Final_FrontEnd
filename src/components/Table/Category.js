@@ -134,7 +134,7 @@ const navigate=useNavigate()
             <i className="fa-solid fa-pen fa-lg"style={{color:"blue"}}></i>
           </button> 
           <button onClick={ ()=>block(row.salaryId)} style={{ border: "none" }}>
-            {row.isBlocked?<i className="fa-sharp fa-solid fa-lock"style={{color:"green"}}></i>:<i className="fa-solid fa-lock-open"></i> }
+            {row.isBlocked?<i className="fa-sharp fa-solid fa-lock"style={{color:"green",fontSize:"20px"}}></i>:<i className="fa-solid fa-lock-open" style={{fontSize:"20px"}}></i> }
             </button>
         </div>
       ), 

@@ -9,17 +9,17 @@ export default function ChartContainer() {
       <div className="row">
         <div className="col d-md-flex " style={{width:"100%"}}>
           <div className="col-4">
-            <ChartDonut  />
-          </div>
-          <div className="col-4 ml-3">
-            <ChartDonut1 />
+            <ChartDonut1  />
           </div>
           <div className="col-4 ml-3">
             <ChartDonut2 />
+          </div>
+          <div className="col-4 ml-3">
+            <ChartDonut />
           </div>
         </div>
       </div>
     </div>
   ); 
-}
+}   
   

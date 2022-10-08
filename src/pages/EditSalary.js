@@ -7,7 +7,7 @@ import SideBar from "../components/Sidebar/SideBar"
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-
+import axios from "axios";
 
 const EditSalary = () => {
   const [salaryType, setSalaryType] = useState("");
@@ -28,6 +28,26 @@ const EditSalary = () => {
       return toast.error("Please Enter the maxSalry more than minSalry");
     }
   }
+
+  const [countries, setCountries] = useState([]);
+
+  const getCountries = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4002/salary/getsalary/${params.salaryId}`,
+      );
+      console.log("############################33",response);    
+      setCountries(response.data.data.user);
+ 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {   
+    getCountries();
+  }, []);
+
+
 
   async function save() {
     let item = {
@@ -103,7 +123,7 @@ const EditSalary = () => {
                   onChange={(e) => setMinSalary(e.target.value)}
                   name="minSalary"
                   type="text"
-                  placeholder={"Enter Minimun Range"}
+                  placeholder={countries.minSalary}
                 />
 
                 <Form.Label className="required-FIELD">Max Salary</Form.Label>
@@ -112,7 +132,7 @@ const EditSalary = () => {
                   onChange={(e) => setMaxSalary(e.target.value)}
                   name="maxSalary"
                   type="text"
-                  placeholder={"Enter Minimun Range"}
+                  placeholder={countries.maxSalary}
                 />
               </Form.Group>
 

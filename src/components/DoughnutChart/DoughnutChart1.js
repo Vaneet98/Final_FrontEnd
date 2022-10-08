@@ -42,15 +42,15 @@ return (
     <Doughnut data={Donutdata}
     onClick={()=>navigate(`/Department`)} />
     <br />
-    <span style={{ marginLeft: "1rem" }}> countBySalaryLevel1 {adminData.countBySalaryLevel1} </span>
-    <span style={{ marginLeft: "2rem" }}>countBySalaryLevel2 {adminData.countBySalaryLevel2} </span>
-    <span style={{ marginLeft: "2rem" }}> countBySalaryLevel3 {adminData.countBySalaryLevel3}</span>
+    <span onClick={()=>navigate(`/SalaryLevel1`)}   style={{ marginLeft: "1rem" }}> <button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Salary Level1 for Department </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.countBySalaryLevel1}</b></span>
+    <span onClick={()=>navigate(`/SalaryLevel2`)}   style={{ marginLeft: "1rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Salary Level2 for Department </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.countBySalaryLevel2}</b> </span>
+    <span  onClick={()=>navigate(`/SalaryLevel3`)}  style={{ marginLeft: "1rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Salary Level3 for Department </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.countBySalaryLevel3}</b> </span>
     <Divider />
     <hr />
     <span style={{ marginLeft: "6rem" }}>
-      Total User {adminData.total}
+    <button onClick={()=>navigate(`/Department`)} style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Total </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp; <b>{adminData.total}</b>
     </span>
-  </>
+  </> 
 );
 }
 

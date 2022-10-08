@@ -6,7 +6,7 @@ import Form from "react-bootstrap/Form";
 import SideBar from "../components/Sidebar/SideBar";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
-
+import axios from "axios";
 
 
 const AppVersionEdit = () => {
@@ -21,6 +21,23 @@ const AppVersionEdit = () => {
     e.preventDefault();
     console.log("data", DeptName);
   }
+  const [countries, setCountries] = useState([]);
+
+  const getCountries = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4002/department/get/${params.deptId}`,
+      );
+      console.log("############################33",response);    
+      setCountries(response.data.data.user);
+ 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {   
+    getCountries();
+  }, []);
 
   async function save() {
     let item = {
@@ -83,7 +100,7 @@ const AppVersionEdit = () => {
                   onChange={(e) => setDeptName(e.target.value)}
                   name="DeptName"
                   type="text"
-                  placeholder={"Enter Department"}
+                  placeholder={countries.DeptName}
                 />
 
                 <br />
@@ -94,7 +111,7 @@ const AppVersionEdit = () => {
                   onChange={(e) => setSalaryType(e.target.value)}
                   name="salaryType"
                   type="text"
-                  placeholder={"Enter Salary Type"}
+                  placeholder={countries.salaryType}
                 />
               </Form.Group>
               <Button

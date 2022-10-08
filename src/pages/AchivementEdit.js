@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import { Container } from "react-bootstrap";
 import { AiOutlineLeft } from "react-icons/ai";
 import Form from "react-bootstrap/Form";
-
+import axios from "axios";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import SideBar from "../components/Sidebar/SideBar"
@@ -18,6 +18,24 @@ const AchivementEdit = () => {
     e.preventDefault();
     console.log("data", eduName);
   }
+
+  const [countries, setCountries] = useState([]);
+
+  const getCountries = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:4002/education/get/${params.eduId}`,
+      );
+      console.log("############################33",response);    
+      setCountries(response.data.data.user);
+ 
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {   
+    getCountries();
+  }, []);
 
   async function save() {
     let item = {
@@ -79,7 +97,7 @@ const AchivementEdit = () => {
                   onChange={(e) => setEduName(e.target.value)}
                   name="eduName"
                   type="text"
-                  placeholder={"Enter Qualification"}
+                  placeholder={countries.eduName}
                 />
               </Form.Group>
               <Button

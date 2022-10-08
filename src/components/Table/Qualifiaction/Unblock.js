@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
-import SideBar from "../Sidebar/SideBar";
+import SideBar from "../../Sidebar/SideBar"
 import { Tooltip, Fab } from "@mui/material";
 import { Add } from "@mui/icons-material";
 import { Link,useNavigate } from "react-router-dom";
@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-const AdminAchivement = () => {
+const Unblock = () => {
   const [search, setSearch] = useState("");
   const [countries, setCountries] = useState([]);
   const [filtercountries, setFiltercountries] = useState([]);
@@ -27,7 +27,7 @@ const AdminAchivement = () => {
   const getCountries = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4002/education/list?limit=100&skip=0&isBlocked=${isBlocked}`
+        `http://localhost:4002/education/list?limit=100&skip=0&isBlocked=${0}`
       );
       console.log(response);
       setCountries(response.data.data.rows);
@@ -150,7 +150,7 @@ const AdminAchivement = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          <Form style={{ float: "left" }}>
+          {/* <Form style={{ float: "left" }}>
                 <Form.Label>Filter</Form.Label>
                 <Form.Select
                   id="select"
@@ -162,7 +162,7 @@ const AdminAchivement = () => {
                   <option value="1">Blocked</option>
                   <option value="0">Un-Blocked</option>
                 </Form.Select>
-              </Form>
+              </Form> */}
           </>
         }
       />
@@ -179,4 +179,4 @@ const AdminAchivement = () => {
   );
 };
  
-export default AdminAchivement;
+export default Unblock;

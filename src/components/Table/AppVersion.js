@@ -106,7 +106,7 @@ const AppVersion = () => {
           </button>
 
           <button onClick={ ()=>block(row.deptId)} style={{ border: "none" }}>
-            {row.isBlocked?<i className="fa-sharp fa-solid fa-lock"style={{color:"green"}}></i>:<i className="fa-solid fa-lock-open"></i> }
+            {row.isBlocked?<i className="fa-sharp fa-solid fa-lock"style={{color:"green",fontSize:"20px"}}></i>:<i className="fa-solid fa-lock-open"style={{fontSize:"20px"}}></i> }
             </button>
         </div>
       ),

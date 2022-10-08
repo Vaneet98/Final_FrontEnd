@@ -55,22 +55,22 @@ const routes = [
 const SideBar = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
   const toggle = () => setIsOpen(!isOpen);
-  const showAnimation = {
-    hidden: {
-      width: 0,
-      opacity: 0,
-      transition: {
-        duration: 0.5,
-      },
-    },
-    show: {
-      opacity: 1,
-      width: "auto",
-      transition: {
-        duration: 0.5,
-      },
-    },
-  };
+  // const showAnimation = {
+  //   hidden: {
+  //     width: 0,
+  //     opacity: 0,
+  //     transition: {
+  //       duration: 0.5,
+  //     },
+  //   },
+  //   show: {
+  //     opacity: 1,
+  //     width: "auto",
+  //     transition: {
+  //       duration: 0.5,
+  //     },
+  //   },
+  // };
 
   const navigate = useNavigate();
   let user = JSON.parse(localStorage.getItem("jwt"));
@@ -145,7 +145,7 @@ const SideBar = ({ children }) => {
             width: isOpen ? "225px" : "85px",
 
             transition: {
-              duration: 0.5,
+              duration: 0.1,
               type: "spring",
               damping: 5,
             },
@@ -159,7 +159,7 @@ const SideBar = ({ children }) => {
                   <SidebarMenu
                     setIsOpen={setIsOpen}
                     route={route}
-                    showAnimation={showAnimation}
+                    // showAnimation={showAnimation}
                     isOpen={isOpen}
                   />
                 );
@@ -176,7 +176,7 @@ const SideBar = ({ children }) => {
                   <AnimatePresence>
                     {isOpen && (
                       <motion.div
-                        variants={showAnimation}
+                        // variants={showAnimation}
                         initial="hidden"
                         animate="show"
                         exit="hidden"

@@ -12,7 +12,7 @@ function DoughnutChart2() {
   const getData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4002/department/getalltablerecorde"
+        "http://localhost:4002/salary/gettotal"
       );
       console.log("This is graph data::",response.data.data);
       setAdminData(response.data.data);
@@ -28,7 +28,7 @@ function DoughnutChart2() {
   datasets: [
     {
       label: "# of Votes",
-      data: [adminData.BlockCount,adminData.UnblockCount,adminData.blockUnblockTotal],
+      data: [adminData.Unblock,adminData.block,adminData.total],
       backgroundColor: ["#1B1464", "#009432","#ED4C67"],
       borderColor: ["rgba(255, 99, 132)", "rgba(255, 162, 235)","rgba(255, 205, 86)"],
       borderWidth: 1,
@@ -42,19 +42,19 @@ return (
 
     <br />
 
-    <span> Pending {adminData.Pending} </span>
+  
 
-    <span style={{ marginLeft: "1rem" }}>BlockCount {adminData.BlockCount}</span>
+    <span onClick={()=>navigate(`/SalaryUnblock`)}style={{ marginLeft: "1rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Salary_ranges_Block </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.block}</b> </span>
 
-    <span style={{ marginLeft: "1rem" }}>UnBlock {adminData.UnblockCount}</span>
+    <span onClick={()=>navigate(`/SalaryBlock`)} style={{ marginLeft: "1rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Salary_ranges_Unblock </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.Unblock}</b> </span>
 
     <Divider />
 
     <hr />
 
-    <span style={{ marginLeft: "5rem" }}> Total  {adminData.blockUnblockTotal} </span>
+    <span onClick={()=>navigate(`/Salary`)} style={{ marginLeft: "5rem" }}> <button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i> Total_Salary_ranges </i></b></button> &nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.total}</b>  </span>
   </>
 );
 }
 
-export default DoughnutChart2;
+export default DoughnutChart2; 

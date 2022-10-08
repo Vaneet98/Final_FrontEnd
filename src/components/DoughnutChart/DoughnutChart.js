@@ -13,7 +13,7 @@ const navigate=useNavigate()
   const getData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:4002/department/getalltablerecorde"
+        "http://localhost:4002/education/getalltablerecorde"
       );
       console.log("This is graph data::",response.data.data);
       setAdminData(response.data.data);
@@ -41,14 +41,14 @@ return (
     <Doughnut
       data={Donutdata}
       style={{ height: "250px !important", width: "250px !important" }}
-      onClick={()=>navigate(`/Department`)}
+      onClick={()=>navigate(`/Qualification`)}
       // onClick={()=><AppVersion/>}
     />
     <br />
-    <span style={{ marginLeft: "3rem" }}> Blocked {adminData.BlockCount} </span>
-    <span style={{ marginLeft: "3rem" }}>UnBlocked {adminData.UnblockCount}</span>
+    <span onClick={()=>navigate(`/QualificationBlock`)}style={{ marginLeft: "3rem" }}> <button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Blocked </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.BlockCount}</b>  </span>
+    <span onClick={()=>navigate(`/QualificationUnBlock`)}style={{ marginLeft: "3rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>UnBlocked </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.UnblockCount}</b> </span>
     <Divider /> <hr style={{ color: "#0D0D0D" }} />
-    <span style={{ marginLeft: "6rem" }}>Total User {adminData.blockUnblockTotal} </span>
+    <span onClick={()=>navigate(`/Qualification`)}style={{ marginLeft: "6rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Total User </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp; <b>{adminData.blockUnblockTotal}</b>  </span>
   </>
 );
 }    
