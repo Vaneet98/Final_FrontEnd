@@ -150,19 +150,7 @@ const Block = () => {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
-          {/* <Form style={{ float: "left" }}>
-                <Form.Label>Filter</Form.Label>
-                <Form.Select
-                  id="select"
-                  name="isBlocked"
-                  value={isBlocked}
-                  onChange={handleSelect}
-                >
-                  <option value="">All</option>
-                  <option value="1">Blocked</option>
-                  <option value="0">Un-Blocked</option>
-                </Form.Select>
-              </Form> */}
+          
           </>
         }
       />

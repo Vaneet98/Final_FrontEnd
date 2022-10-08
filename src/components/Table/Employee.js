@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import SideBar from "../Sidebar/SideBar";
-
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 // Axios
 import axios from "axios";
 
@@ -13,10 +14,9 @@ import { useNavigate, Link } from "react-router-dom";
 // React Table
 import DataTable from "react-data-table-component";
 
-// React Bootstrap
-import Form from "react-bootstrap/Form";
 
-var result;
+
+
 
 const Employee = () => {
   // use Navigate
@@ -25,20 +25,10 @@ const Employee = () => {
   // For Searching in Table
   const [search, setSearch] = useState("");
 
-  // For Storing API Response
-  const [values, setValues] = useState({
-    error: "",
-    success: "false",
-    data: [],
-  });
+ 
 
-  const [filterSearch, setFilterSearch] = useState({
-    error: "",
-    success: "false",
-    data: [],
-  });
 
-  const [showModel, setShowModel] = useState(false);
+
 
   const [isBlocked, setIsBlocked] = useState("");
   const [countries, setCountries] = useState([]);
@@ -52,9 +42,6 @@ const Employee = () => {
     selectAllRowsItemText: "All",
   };
 
-  const isBlockDropDown = (e) => {
-    setIsBlocked(e.target.value);
-  };
 
 
   const preload = async () => {
@@ -69,50 +56,29 @@ const Employee = () => {
       console.log(error);
     }
   };
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+    localStorage.removeItem("id");
+  };
+  const handleShow = (id) => {
+    setShow(true);
+    localStorage.setItem("id", id);
+  };
 
-
-  // TODO: API CALLS
-  // const preload = async () => {
-  //   const data = await axios.get(`http://localhost:4002/user/userDetails`);
-  //   setCountries(data.data.data.data);
-  //   console.log(data);
-  //   console.log(data.data.data);
-  //   console.log("This is empl^^^^^^^^^^^^^^^^^^^^^^^^", data.data.data.data); /* Result we want */
-  //   if (data.data.status == 400) {
-  //     toast.error(data.data.message);
-  //     setValues({ ...values, error: data.data.message, success: false });
-  //   } else {
-  //     setValues({ ...values, data: data.data.data.data });
-  //     // setValues({ ...values, data: data.data.data.data });
-  //     setFilterSearch({ ...filterSearch, data: data.data.data.data });
-  //   }
-  // };
-
-  // async function blockUser(eduId) {
-  //   await fetch(`${API}blockUser/${eduId}`, {
-  //     method: "POST",
-  //   }).then((result) => {
-  //     result.json().then((resq) => {
-  //       console.log("blockinfo", resq);
-  //       if (resq.data.status === "200") {
-  //         toast.success(resq.data.message, {
-  //           position: toast.POSITION.TOP_CENTER,
-  //         });
-  //       } else if (resq.data.status === "201") {
-  //         toast.success(resq.data.message, {
-  //           position: toast.POSITION.TOP_CENTER,
-  //         });
-  //       } else {
-  //         toast(resq.data.message);
-  //       }
-  //       preload();
-  //     });
-  //   });
-  // }
-
-  // useEffect(() => {      
-  //   preload();
-  // }, [search]);
+  async function deleteUser(){
+    let id = localStorage.getItem("id");
+    await fetch(`http://localhost:4001/api/delete/${id}`,{
+      method:"DELETE"
+    }).then((result)=>{
+      result.json().then((resq)=>{
+        console.log("This is user request ",resq);
+        toast.success("User delete successfull",{position: toast.POSITION.TOP_CENTER});
+        preload(); 
+        handleClose();
+      })
+    }) 
+   }
 
   useEffect(() => {
     preload();
@@ -258,11 +224,12 @@ const Employee = () => {
             width: "110px",
           }}
         >
-          <button onClick={()=>navigate(`/edit/${row.id} `)} style={{ border: "none" }}>
+          <button onClick={()=>navigate(`/edit/${row.id} `)} style={{ border: "none",backgroundColor:"white" }}>
             {" "}
-            <i className="fa-solid fa-pen fa-lg"style={{color:"blue"}}></i>
+            <i className="fa-solid fa-pen fa-lg"style={{color:"blue",backgroundColor:"white"}}></i>
           </button> 
-          <button onClick={ ()=>block(row.id)} style={{ border: "none" }}>
+          <button onClick={() => handleShow(row.id)} style={{ border: "none" }}> <i  className="fa-regular fa-trash-can fa-lg" style={{color:"red"}}></i></button>
+          <button onClick={ ()=>block(row.id)} style={{ border: "none",backgroundColor:"white" }}>
             {row.Isblocked?<i className="fa-sharp fa-solid fa-lock"style={{color:"green",fontSize:"20px"}}></i>:<i className="fa-solid fa-lock-open"style={{fontSize:"20px"}}></i> }   
             </button>
         </div>
@@ -294,8 +261,6 @@ const Employee = () => {
         <DataTable
           title="Employee Table"
           columns={colunms}
-          // data={result ? result : values.data}
-          // data={values.data}
           data={filtercountries}   
           pagination
           paginationComponentOptions={paginationComponentOptions}
@@ -320,6 +285,20 @@ const Employee = () => {
              
           }
         />
+           <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Important message</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure, you want to delete this record?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              No
+            </Button>
+            <Button variant="primary" onClick={deleteUser}>
+              Yes
+            </Button>
+          </Modal.Footer>
+</Modal>
       </div>
     </>
   );

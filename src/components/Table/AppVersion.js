@@ -100,12 +100,12 @@ const AppVersion = () => {
             width: "110px",
           }}
         >
-          <button  onClick={()=>navigate(`/editDepartment/${row.deptId} `)} style={{ border: "none" }}> 
+          <button  onClick={()=>navigate(`/editDepartment/${row.deptId} `)} style={{ border: "none",backgroundColor:"white" }}> 
             {" "}
-            <i className="fa-solid fa-pen fa-lg"style={{color:"blue"}}></i>
+            <i className="fa-solid fa-pen fa-lg"style={{color:"blue",backgroundColor:"white"}}></i>
           </button>
 
-          <button onClick={ ()=>block(row.deptId)} style={{ border: "none" }}>
+          <button onClick={ ()=>block(row.deptId)} style={{ border: "none",backgroundColor:"white" }}>
             {row.isBlocked?<i className="fa-sharp fa-solid fa-lock"style={{color:"green",fontSize:"20px"}}></i>:<i className="fa-solid fa-lock-open"style={{fontSize:"20px"}}></i> }
             </button>
         </div>

@@ -45,8 +45,8 @@ return (
       // onClick={()=><AppVersion/>}
     />
     <br />
-    <span onClick={()=>navigate(`/QualificationBlock`)}style={{ marginLeft: "3rem" }}> <button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Blocked </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.BlockCount}</b>  </span>
-    <span onClick={()=>navigate(`/QualificationUnBlock`)}style={{ marginLeft: "3rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>UnBlocked </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.UnblockCount}</b> </span>
+    <span onClick={()=>navigate(`/QualificationBlock`)}style={{ marginLeft: "3rem" }}> <button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Qulafication_Blocked </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.BlockCount}</b>  </span>
+    <span onClick={()=>navigate(`/QualificationUnBlock`)}style={{ marginLeft: "3rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Qualification_UnBlocked </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp;<b>{adminData.UnblockCount}</b> </span>
     <Divider /> <hr style={{ color: "#0D0D0D" }} />
     <span onClick={()=>navigate(`/Qualification`)}style={{ marginLeft: "6rem" }}><button style={{border:"none",textDecoration:"none",backgroundColor:"white"}}><b><i>Total User </i></b></button>&nbsp;&nbsp;&nbsp;&nbsp; <b>{adminData.blockUnblockTotal}</b>  </span>
   </>
