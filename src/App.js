@@ -53,6 +53,8 @@ import SalaryLevel5 from "./components/Table/department/SalaryLevel5";
 import SalaryLevel3 from "./components/Table/department/SalaryLevel3";
 import Block from "./components/Table/Qualifiaction/Block";
 import Unblock from "./components/Table/Qualifiaction/Unblock";
+import EduView from "./components/ViewTableDetail/EmpView.js/EduView";
+import SalaryView from "./components/ViewTableDetail/EmpView.js/SalaryView";
 //  import { useCookies } from "react-cookie";
 function App() {
   // const [cookies, setCookie] = useCookies(["user"]);
@@ -93,6 +95,10 @@ function App() {
 
           <Route path="/salarydetail/:salaryId" element={<Protected Cmp= {Categoryview} />} />
           <Route path="/departmentdetails/:deptId" element={<Protected Cmp= {Appview} />} />
+
+                  {/* Employee_View */}
+          <Route path="/eduView/:id" element={<Protected Cmp= {EduView} />} />
+          <Route path="/salaryView/:id" element={<Protected Cmp= {SalaryView} />} />
 
 
           <Route

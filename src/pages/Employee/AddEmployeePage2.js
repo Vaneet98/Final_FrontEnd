@@ -44,7 +44,7 @@ const AddEmployeePage2 = () => {
 
   const [salary, setSalary] = useState([]);
   const [allocatedSalary, setAllocatedSalary] = useState([]);
-
+ 
  
 
   const { email } = userData;
@@ -70,12 +70,10 @@ const AddEmployeePage2 = () => {
       }).then((data) => {
         console.log(data);
         if (data.data.status == 400) {
-          toast.error(data.data.message);
+          // toast.error(data.data.message);
         } else if (data.data.status == 200) {
-          toast.success(data.data.message);
-          setTimeout(() => {
-            navigate("/Employee");
-          }, 2000);
+          // toast.success(data.data.message);
+         
         }
       });
     });
@@ -86,17 +84,17 @@ const AddEmployeePage2 = () => {
         email,
         eduName,
       }).then((data) => {
-        console.log("ANKUSH");
+       
         console.log(data);
         if (data.data.status == 400) {
-          toast.error(data.data.message);
+          // toast.error(data.data.message);
           setUserData({
             ...userData,
             error: data.data.message,
             success: false,
           });
         } else if (data.data.status == 200) {
-          toast.success(data.data.message);
+          // toast.success(data.data.message);
          
           setUserData({
             ...userData,
@@ -117,7 +115,9 @@ const AddEmployeePage2 = () => {
           toast.error(data.data.message);
         } else if (data.data.status == 200) {
           toast.success(data.data.message);
-        
+          setTimeout(() => {
+            navigate("/Employee");
+          }, 2000);
         }
       });
     });
@@ -368,7 +368,7 @@ const AddEmployeePage2 = () => {
                         {item.salaryType}
                       </span>
                     </div>
-                  );
+                  ); 
                 })}
 
                 <div>{`Items checked are: ${checkedItemsSalary}`}</div>

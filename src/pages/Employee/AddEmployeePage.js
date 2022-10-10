@@ -67,12 +67,12 @@ const AddEmployeePage = () => {
           });
           toast.success(data.data.message);
 
-          setTimeout(() => {
+          setTimeout(() => { 
             navigate("/addEmployee2");
           }, 3000);
         }
-      }
-    );
+      } 
+    ); 
   };
 
   return (

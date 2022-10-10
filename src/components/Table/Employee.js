@@ -4,7 +4,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 // Axios
 import axios from "axios";
-
+import {FcMoneyTransfer} from "react-icons/fc";
+import { MdCastForEducation } from "react-icons/md";
 // React Toastify
 import { toast } from "react-toastify";
 
@@ -47,7 +48,7 @@ const Employee = () => {
   const preload = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:4002/user/userDetails`
+        `http://localhost:4002/user/userDetails1`
       );
       console.log(response);
       setCountries(response.data.data.data);
@@ -169,52 +170,95 @@ const Employee = () => {
       sortable: true,
     },
 
+    // {
+    //   name: (
+    //     <h5>
+    //       <b>Education Qualification-1</b>
+    //     </h5>
+    //   ),
+    //   selector: (row) => row.employeeDepts[0]?.employeeEdus[0]?.eduName,
+    //   sortable: true,
+    // },
+
+    // {
+    //   name: (
+    //     <h5>
+    //       <b>Education Qualification-2</b>
+    //     </h5>
+    //   ),
+    //   selector: (row) => row.employeeDepts[0]?.employeeEdus[1]?.eduName,
+    //   sortable: true,
+    // },
+
+    // {
+    //   name: (
+    //     <h5>
+    //       <b>Education Qualification-3</b>
+    //     </h5>
+    //   ),
+    //   selector: (row) => row.employeeDepts[0]?.employeeEdus[2]?.eduName,
+    //   sortable: true,
+    // },
+
+    // {
+    //   name: (
+    //     <h5>
+    //       <b>Salary Allocated</b>
+    //     </h5>
+    //   ),
+    //   selector: (row) =>
+    //     row.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[0]
+    //       ?.salaryType ||
+    //     row.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[1]
+    //       ?.salaryType ||
+    //     row.employeeDepts[0]?.employeeEdus[1]?.employeeSalaries[0]?.salaryType,
+    //   //  row.employeeDepts[0]?.employeeEdus[0]?.eduName
+    //   sortable: true,
+    // },
     {
       name: (
         <h5>
-          <b>Education Qualification-1</b>
+          <b>Edu_Detail</b>
         </h5>
       ),
-      selector: (row) => row.employeeDepts[0]?.employeeEdus[0]?.eduName,
-      sortable: true,
+      cell: (row) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "110px",
+          }}
+        >
+          <button onClick={()=>navigate(`/eduView/${row.id} `)} style={{ border: "none",backgroundColor:"white" }}>
+            {" "}
+            {/* <MdCastForEducation style={{color:"blue",backgroundColor:"white",fontSize:"20px"}} /> */}
+            <i className="fa-solid fa-graduation-cap"style={{color:"black",backgroundColor:"white",fontSize:"20px"}}></i>
+          </button> 
+        </div>
+      ), 
     },
-
     {
       name: (
         <h5>
-          <b>Education Qualification-2</b>
+          <b>Salary_Details</b>
         </h5>
       ),
-      selector: (row) => row.employeeDepts[0]?.employeeEdus[1]?.eduName,
-      sortable: true,
+      cell: (row) => (
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            width: "110px",
+          }}
+        >
+          <button onClick={()=>navigate(`/salaryView/${row.id} `)} style={{ border: "none",backgroundColor:"white" }}>
+            {" "}
+            <FcMoneyTransfer style={{color:"blue",backgroundColor:"white",fontSize:"20px"}}/>
+            {/* <i className="fa-solid fa-pen fa-lg"style={{color:"blue",backgroundColor:"white"}}></i> */}
+          </button> 
+        </div>
+      ), 
     },
-
-    {
-      name: (
-        <h5>
-          <b>Education Qualification-3</b>
-        </h5>
-      ),
-      selector: (row) => row.employeeDepts[0]?.employeeEdus[2]?.eduName,
-      sortable: true,
-    },
-
-    {
-      name: (
-        <h5>
-          <b>Salary Allocated</b>
-        </h5>
-      ),
-      selector: (row) =>
-        row.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[0]
-          ?.salaryType ||
-        row.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[1]
-          ?.salaryType ||
-        row.employeeDepts[0]?.employeeEdus[1]?.employeeSalaries[0]?.salaryType,
-      //  row.employeeDepts[0]?.employeeEdus[0]?.eduName
-      sortable: true,
-    },
-
     {
       name: (
         <h6>
@@ -244,10 +288,7 @@ const Employee = () => {
   ];
   useEffect(() => {
     const result = countries.filter((country) => {
-      return country.name.toLowerCase().match(search.toLowerCase())||country.email.toLowerCase().match(search.toLowerCase())||country.employeeDepts[0]?.DeptName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[1]?.DeptName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[2]?.DeptName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[0]?.employeeEdus[0]?.eduName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[0]?.employeeEdus[1]?.eduName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[0]?.employeeEdus[2]?.eduName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[0]
-      ?.salaryType.toLowerCase().match(search.toLowerCase())|country.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[1]
-      ?.salaryType.toLowerCase().match(search.toLowerCase())|country.employeeDepts[0]?.employeeEdus[1]?.employeeSalaries[0]
-      ?.salaryType.toLowerCase().match(search.toLowerCase());
+      return country.name.toLowerCase().match(search.toLowerCase())||country.email.toLowerCase().match(search.toLowerCase())||country.employeeDepts[0]?.DeptName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[1]?.DeptName.toLowerCase().match(search.toLowerCase())||country.employeeDepts[2]?.DeptName.toLowerCase().match(search.toLowerCase())
     });
     setFiltercountries(result);
   }, [search]);
@@ -288,7 +329,7 @@ const Employee = () => {
               //   width: "200px",
               // }}
             />
-             <Form style={{ float: "left" }}>
+             {/* <Form style={{ float: "left" }}>
                 <Form.Label>Filter</Form.Label>
                 <Form.Select
                   id="select"
@@ -300,7 +341,7 @@ const Employee = () => {
                   <option value="1">Blocked</option>
                   <option value="0">Un-Blocked</option>
                 </Form.Select>
-              </Form>
+              </Form> */}
              </>
           }
         />
