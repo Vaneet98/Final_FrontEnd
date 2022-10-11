@@ -11,7 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 // API
 import { editEmployee } from "../../helper/EmployeeHelper/EmployeeApiCall";
-
+import Form from "react-bootstrap/Form";
 const EditEmployee1 = () => {
   // navigate
   const navigate = useNavigate();
@@ -98,7 +98,7 @@ const EditEmployee1 = () => {
       <SideBar />
       <Container style={{ width: "85%", marginLeft: "250px" }}>
         <form className="form" onSubmit={handleSubmit}>
-          <h3> Add Employee</h3>
+          <h3> Edit Employee</h3>
           <div className="form-center">
             {/* NAME */}
             <label>Name</label>
@@ -150,9 +150,9 @@ const EditEmployee1 = () => {
             />{" "}
             <br />
             <br />
-            <label>Gender</label>
+            {/* c
             <br />
-            {/* <br/> */}
+          
             <input
               type="text"
               name="gender"
@@ -160,7 +160,20 @@ const EditEmployee1 = () => {
               value={userData.gender}
               onChange={handleChange}
               style={{ width: "70%" }}
-            />{" "}
+            />{" "} */}
+            <label>Gender</label>
+            <Form>
+              <Form.Select
+                id="gender"
+                name="gender"
+                value={userData.gender}
+                onChange={handleChange}
+                style={{width:"20%"}}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </Form.Select>
+            </Form>
             <br />
             <br />
             <label>Address</label>

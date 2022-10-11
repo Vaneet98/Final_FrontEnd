@@ -123,7 +123,7 @@ const Employee = () => {
     {
       name: (
         <h6>
-          <b>Employee Name</b>
+          <b>Employee_Name</b>
         </h6>
       ),
       selector: (row) => row.name,
@@ -133,7 +133,7 @@ const Employee = () => {
     {
       name: (
         <h6>
-          <b>Employee Email</b>
+          <b>Employee_Email</b>
         </h6>
       ),
       selector: (row) => row.email,
@@ -143,7 +143,7 @@ const Employee = () => {
     {
       name: (
         <h6>
-          <b>Department Allocated-1</b>
+          <b>Department_1</b>
         </h6>
       ),
       selector: (row) => row.employeeDepts[0]?.DeptName,
@@ -153,7 +153,7 @@ const Employee = () => {
     {
       name: (
         <h6>
-          <b>Department Allocated-2</b>
+          <b>Department_2</b>
         </h6>
       ),
       selector: (row) => row.employeeDepts[1]?.DeptName,
@@ -163,7 +163,7 @@ const Employee = () => {
     {
       name: (
         <h6>
-          <b>Department Allocated-3</b>
+          <b>Department_3</b>
         </h6>
       ),
       selector: (row) => row.employeeDepts[2]?.DeptName,
@@ -195,7 +195,7 @@ const Employee = () => {
     {
       name: (
         <h6>
-          <b>Sal_Details</b>
+          <b>Sal_Detail</b>
         </h6>
       ),
       cell: (row) => (
@@ -247,9 +247,9 @@ const Employee = () => {
     });
     setFiltercountries(result);
   }, [search]);
-  // const viewIndividualResult = (row) => {
-  //   navigate(`/ViewIndividualEducationPage/${row.eduId}`);
-  // };
+  const viewIndividualResult = (row) => {
+    navigate(`/empView/${row.id}`);
+  };
 
   // useEffect(() => {
   //   admin();
@@ -267,7 +267,7 @@ const Employee = () => {
           pagination
           paginationComponentOptions={paginationComponentOptions}
           fixedHeader
-          // onRowClicked={viewIndividualResult}
+          onRowClicked={viewIndividualResult}
           selectableRowsHighlight
           highlightOnHover
           subHeader

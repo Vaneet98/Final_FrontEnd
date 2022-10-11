@@ -58,32 +58,32 @@ function EduView() {
               <Link to="/Employee">
                 <AiOutlineLeft /* fa-lg */ color="black" />
               </Link><b><i>
-              Detail Salary Table</i></b>
+             Employee Education Details</i></b>
             </div>
             <hr />
             <Table borderless>
               <tbody>
                 <tr>
-                  <td><h4>Employee ID</h4></td>
+                  <td><h5>Employee ID</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.id}</td>
                 </tr>
                 <tr>
-                  <td><h4>Name</h4></td>
+                  <td><h5>Name</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.name}</td>
                 </tr>
 
                 <tr>
-                  <td><h4>Email</h4></td>
+                  <td><h5>Email</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.email}</td>
                 </tr>
 
                 <tr>
-                  <td><h4>Address</h4></td>
+                  <td><h5>Address</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.address}</td>
                 </tr>
 
                 <br />
-                <h4>Education Qualification</h4>
+                <h5>Education Qualification</h5>
 
                 <tr>
                   {/* <td>Department-1</td> */}

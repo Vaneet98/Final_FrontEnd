@@ -46,7 +46,7 @@ function Login() {
     if (!email || !password) {
       console.log("Please Fill out all the Fields");
       return toast.error("Please Fill out all the Fields");
-    }
+    } 
     if (checkbox === true) {
       setCookie("email", email);
       setCookie("password", password);

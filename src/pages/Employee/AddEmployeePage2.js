@@ -60,7 +60,21 @@ const AddEmployeePage2 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
+    if (allocatedDepartment.length == 0) {
+      return toast.error("Please Fill out all the Fields",{
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    if (allocatedEducation.length == 0) {
+      return toast.error("Please Fill out all the Fields",{
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
+    if (allocatedSalary.length == 0) {
+      return toast.error("Please Fill out all the Fields",{
+        position: toast.POSITION.TOP_CENTER,
+      });
+    }
 
     allocatedDepartment.map(async (DeptName, index) => {
    
@@ -114,7 +128,7 @@ const AddEmployeePage2 = () => {
         if (data.data.status == 400) {
           toast.error(data.data.message);
         } else if (data.data.status == 200) {
-          toast.success(data.data.message);
+          toast.success("Employee Details added successfully");
           setTimeout(() => {
             navigate("/Employee");
           }, 2000);
@@ -268,16 +282,6 @@ const AddEmployeePage2 = () => {
       <Container style={{ padding: "40px", marginLeft: "235px" }}>
         <form className="form1" onSubmit={handleSubmit}>
           <h3> Add Employee</h3>
-          {/* EMAIL */}
-
-          {/* <label>Email</label>
-          <br />
-          <input
-            type="email"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-          /> */}
           <br />
 
           <div className="form-center">

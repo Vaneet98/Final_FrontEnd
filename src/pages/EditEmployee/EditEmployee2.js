@@ -48,33 +48,6 @@ const EditEmployee2 = () => {
 
   const { id } = userData;
   console.log("3333333333333333", id);
-
-  // const handleChange = (e) => {
-  //   console.log(e.target);
-  //   const name = e.target.name;
-  //   const value = e.target.value;
-  //   console.log(`${name}: ${value}`);
-  //   setUserData({ ...userData, error: false, [name]: value });
-  // };
-
-  
-
-
-
-  // const preload2 = async (id) => {
-  //   const data = await axios.delete(
-  //     `http://localhost:4002/user/editdelete/${params.id}`
-  //   );
-  //   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2",data);
-  //   console.log(data.data.data);
-  //   console.log(data.data.data.data); /* Result we want */
-  //   if (data.data.status == 400) {
-  //     toast.error(data.data.message);
-  //   } else {
-  //     console.log("data deleted successfully.");
-  //   }
-  // };
-
   async function save() {
     await fetch(`http://localhost:4002/user/editdelete/` + params.id, {
       method: "DELETE",
@@ -85,21 +58,6 @@ const EditEmployee2 = () => {
     }).then((result) => {
       result.json().then((resq) => {
         console.log("This is resq ", resq);
-        // if (resq.data.status === 400) {
-        //   return toast.error(resq.data.message, {
-        //     position: toast.POSITION.TOP_CENTER,
-        //   });
-        // }
-        // if (resq.statusCode === 200) {
-        //   toast.success(resq.data.message, {
-        //     position: toast.POSITION.TOP_CENTER,
-        //   });
-        //   console.log("DATA DELETED SUCESSFULLY");
-        // } else if (resq.data.status === "failed") {
-        //   toast.error(resq.data.message, {
-        //     position: toast.POSITION.TOP_CENTER,
-        //   });
-        // }
       });
     });
   }
@@ -107,68 +65,81 @@ const EditEmployee2 = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    console.log("INSIDE MAP", allocatedEducation);
-   
-    save();
-    allocatedDepartment.map(async (DeptName, index) => {
-      console.log("LOOOOOOP", DeptName);
-      await editEmployee({
-        DeptName,
-        id,
-      }).then((data) => {
-        console.log(data);
-        if (data.data.status == 400) {
-          // toast.error(data.data.message);
-        } else if (data.data.status == 200) {
-          // toast.success(data.data.message);
-          console.log("DEPARTMENT ADDED&&&&&&&&&&&&&&&&&&&&&&&&");
-        }
+    if (allocatedDepartment.length == 0) {
+      return toast.error("Please Fill out all the Fields",{
+        position: toast.POSITION.TOP_CENTER,
       });
-    });
-
-    allocatedEducation.map(async (eduName, index) => {
-      console.log("LOOOOOOP", eduName);
-      await editEmployee({
-        id,
-        eduName,
-      }).then((data) => {
-        console.log(data);
-        if (data.data.status == 400) {
-          // toast.error(data.data.message);
-          setUserData({
-            ...userData,
-            error: data.data.message,
-            success: false,
-          });
-        } else if (data.data.status == 200) {
-          // toast.success(data.data.message);
-          console.log("EDUCATION ADDED&&&&&&&&&&&&&&&&&&&&&&&&");
-          setUserData({
-            ...userData,
-            success: true,
-          });
-        }
+    }
+    if (allocatedEducation.length == 0) {
+      return toast.error("Please Fill out all the Fields",{
+        position: toast.POSITION.TOP_CENTER,
       });
-    });
-
-    allocatedSalary.map(async (salaryType, index) => {
-      console.log("LOOOOOOP", salaryType);
-      await editEmployee({
-        salaryType,
-        id,
-      }).then((data) => {
-        console.log(data);
-        if (data.data.status == 400) {
-          toast.error(data.data.message);
-        } else if (data.data.status == 200) {
-          toast.success(data.data.message);
-          setTimeout(() => {
-            navigate(`/employee`);
-          }, 3000);
-        }
+    }
+    if (allocatedSalary.length == 0) {
+      return toast.error("Please Fill out all the Fields",{
+        position: toast.POSITION.TOP_CENTER,
       });
-    });
+    }
+      save();
+      allocatedDepartment.map(async (DeptName, index) => {
+        console.log("LOOOOOOP", DeptName);
+        await editEmployee({
+          DeptName,
+          id,
+        }).then((data) => {
+          console.log(data);
+          if (data.data.status == 400) {
+            // toast.error(data.data.message);
+          } else if (data.data.status == 200) {
+            // toast.success(data.data.message);
+            console.log("DEPARTMENT ADDED&&&&&&&&&&&&&&&&&&&&&&&&");
+          }
+        });
+      });
+  
+      allocatedEducation.map(async (eduName, index) => {
+        console.log("LOOOOOOP", eduName);
+        await editEmployee({
+          id,
+          eduName,
+        }).then((data) => {
+          console.log(data);
+          if (data.data.status == 400) {
+            // toast.error(data.data.message);
+            setUserData({
+              ...userData,
+              error: data.data.message,
+              success: false,
+            });
+          } else if (data.data.status == 200) {
+            // toast.success(data.data.message);
+            console.log("EDUCATION ADDED&&&&&&&&&&&&&&&&&&&&&&&&");
+            setUserData({
+              ...userData,
+              success: true,
+            });
+          }
+        });
+      });
+  
+      allocatedSalary.map(async (salaryType, index) => {
+        console.log("LOOOOOOP", salaryType);
+        await editEmployee({
+          salaryType,
+          id,
+        }).then((data) => {
+          console.log(data);
+          if (data.data.status == 400) {
+            toast.error(data.data.message);
+          } else if (data.data.status == 200) {
+            toast.success("Edit Sucessfully");
+            setTimeout(() => {
+              navigate(`/employee`);
+            }, 3000);
+          }
+        });
+      });
+    
   };
 
   const preload = () => {
@@ -314,31 +285,21 @@ const EditEmployee2 = () => {
   return (
     <>
       <SideBar />
-      <Container style={{ width: "85%", marginLeft: "250px" }}>
-        <form className="form" onSubmit={handleSubmit}>
-          <h3> Add Employee</h3>
-          {/* EMAIL */}
-
-          {/* <label>Email</label>
+      <Container style={{ padding: "40px", marginLeft: "235px" }}>
+        <form className="form1" onSubmit={handleSubmit}>
+          <h3> Edit Employee</h3>
           <br />
-          <input
-            type="email"
-            name="email"
-            value={userData.email}
-            onChange={handleChange}
-          />
-          <br /> */}
 
           <div className="form-center">
             <div className="checkList">
               <h3
-                className="title"
-                style={{ marginLeft: "-40px", marginBottom: "-500px" }}
+                className="title1"
+               
               >
                 Education Qualification
               </h3>
               <div className="list-container">
-                {console.log("THIS", educationQualification)}
+                
 
                 {educationQualification.map((item, index) => {
                   console.log(item);
@@ -417,7 +378,7 @@ const EditEmployee2 = () => {
                         {item.salaryType}
                       </span>
                     </div>
-                  );
+                  ); 
                 })}
 
                 <div>{`Items checked are: ${checkedItemsSalary}`}</div>
@@ -428,10 +389,10 @@ const EditEmployee2 = () => {
 
             <button
               type="submit"
-              className="btn btn-block changes"
+              style={{backgroundColor:"blue", color:"white",fontSize:"20px",padding:"10px 40px",borderRadius:"30px"}}
               onClick={handleSubmit}
             >
-              Save and Continue
+              Save 
             </button>
           </div>
         </form>

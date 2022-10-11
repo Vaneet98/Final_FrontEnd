@@ -54,6 +54,7 @@ import SalaryLevel3 from "./components/Table/department/SalaryLevel3";
 import Block from "./components/Table/Qualifiaction/Block";
 import Unblock from "./components/Table/Qualifiaction/Unblock";
 import EduView from "./components/ViewTableDetail/EmpView.js/EduView";
+import OnclieckEmpDetail from "./components/ViewTableDetail/EmpView.js/OnclieckEmpDetail";
 import SalaryView from "./components/ViewTableDetail/EmpView.js/SalaryView";
 // import { editEmployee } from "./helper/EmployeeHelper/EmployeeApiCall";
 import EditEmployee2 from "./pages/EditEmployee/EditEmployee2";
@@ -102,6 +103,7 @@ function App() {
                   {/* Employee_View */}
           <Route path="/eduView/:id" element={<Protected Cmp= {EduView} />} />
           <Route path="/salaryView/:id" element={<Protected Cmp= {SalaryView} />} />
+          <Route path="/empView/:id" element={<Protected Cmp= {OnclieckEmpDetail} />} />
 
 
           <Route

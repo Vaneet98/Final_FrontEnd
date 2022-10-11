@@ -59,32 +59,32 @@ function SalaryView() {
                 <AiOutlineLeft /* fa-lg */ color="black" />
               </Link>
               <b><i>
-              Detail Salary Table </i> </b>
+              Employee Salary Details </i> </b>
             </div>
             <hr />
             <Table borderless>
               <tbody>
                 <tr>
-                  <td><h4>Employee_id</h4></td>
+                  <td><h5>Employee_id</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.id}</td>
                 </tr>
                 <tr>
-                  <td><h4>Name</h4></td>
+                  <td><h5>Name</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.name}</td>
                 </tr>
 
                 <tr>
-                  <td><h4>Email</h4></td>
+                  <td><h5>Email</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.email}</td>
                 </tr>
 
                 <tr>
-                  <td><h4>Address</h4></td>
+                  <td><h5>Address</h5></td>
                   <td style={{ paddingLeft: "150px" }}>{user[0]?.address}</td>
                 </tr>
 
                 <br />
-                <h4>Employee Salary Level</h4>
+                <h5>Employee Salary Level</h5>
 
                 <tr>
                   {/* <td>Department-1</td> */}

@@ -16,7 +16,7 @@ import { useNavigate } from "react-router-dom";
 
 // API
 import { addEmployee } from "../../helper/EmployeeHelper/EmployeeApiCall";
-
+import Form from "react-bootstrap/Form";
 const AddEmployeePage = () => {
   // navigate
   const navigate = useNavigate();
@@ -125,15 +125,28 @@ const AddEmployeePage = () => {
               onChange={handleChange}
             />{" "}
             <br />
-            <label>Gender</label>
+            {/* <label>Gender</label>
             <br />
-            {/* <br/> */}
+    
             <input
               type="text"
               name="gender"
               value={userData.gender}
               onChange={handleChange}
-            />{" "}
+            />{" "} */}
+            <label>Gender</label>
+            <Form>
+              <Form.Select
+                id="gender"
+                name="gender"
+                value={userData.gender}
+                onChange={handleChange}
+                style={{width:"20%"}}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </Form.Select>
+            </Form>
             <br />
             <label>Address</label>
             <br />

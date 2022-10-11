@@ -28,6 +28,10 @@ const Registration = () => {
   }
   async function signup() {
     console.log(name, password, email);
+    if (!email || !password||!name) {
+      console.log("Please Fill out all the Fields");
+      return toast.error("Please Fill out all the Fields");
+    }
     let item = { name, password, email }; 
     console.log(item);
     let result = await fetch(
@@ -40,13 +44,33 @@ const Registration = () => {
           Accept: "application/json",
         },
       }
-    );
-    result = await result.json();
-     toast.success("Admin Register successfull, Please login",{position: toast.POSITION.TOP_CENTER});
-      setTimeout(() => {
-                  navigate("/");
-                }, 2000);
-    console.log(result);
+    ).then((result) => {
+      result.json().then((resq) => {
+        console.log("LINK SEND",resq)
+        if(resq.statusCode===400){
+          toast.error(resq.message)
+        }else if(resq.data.status==="failed"){
+          toast.error(resq.data.message)
+        }
+        else if(resq.data.status===401){
+          toast.error(resq.data.message)
+        }
+        else if(resq.data.status==="Success"){
+          toast.success(resq.data.message, {
+            position: toast.POSITION.TOP_CENTER,
+          });
+          setTimeout(() => {
+            navigate("/");
+          }, 2000);
+        }
+      });
+    });
+    // result = await result.json();
+    //  toast.success("Admin Register successfull, Please login",{position: toast.POSITION.TOP_CENTER});
+    //   setTimeout(() => {
+    //               navigate("/");
+    //             }, 2000);
+    // console.log(result);
   }
 
   return (
