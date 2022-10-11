@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-
+import { useParams } from "react-router-dom";
+import axios from "axios";
 // Toast
 import { toast } from "react-toastify";
 import { Container } from "react-bootstrap";
@@ -7,9 +8,6 @@ import { Container } from "react-bootstrap";
 // Components
 // import { FormRow } from "../../../components";
 import SideBar from "../../components/Sidebar/SideBar";
-
-// CSS 
-// import Wrapper from "../../../assets/wrappers/DashboardFormPage";
 
 // React Router
 import { useNavigate } from "react-router-dom";
@@ -19,72 +17,122 @@ import {
   getEducationQualification,
   getDepartment,
   getSalary,
-  addEmployee,
+  editEmployee,
 } from "../../helper/EmployeeHelper/EmployeeApiCall";
 
-const AddEmployeePage2 = () => {
+const EditEmployee2 = () => {
   // navigate
   const navigate = useNavigate();
-
+  const params = useParams();
   const [userData, setUserData] = useState({
-    email: localStorage.getItem("User_Email"),
+    // email: localStorage.getItem("USER_EMAIL"),
+    id: params.id,
     error: "",
     success: false,
   });
-
+  console.log(userData.id);
   const [educationQualification, setEducationQualification] = useState([]);
   const [allocatedEducation, setAllocatedEducation] = useState([]);
 
-
+  console.log("EDUCATION&&&&&&&&", allocatedEducation);
 
   const [department, setDepartment] = useState([]);
   const [allocatedDepartment, setAllocatedDepartment] = useState([]);
 
- 
+  console.log("DEPARTMENT&&&&&&&&", allocatedDepartment);
 
   const [salary, setSalary] = useState([]);
   const [allocatedSalary, setAllocatedSalary] = useState([]);
- 
- 
 
-  const { email } = userData;
+  console.log("SALARY&&&&&&&&", allocatedSalary);
 
-  const handleChange = (e) => {
-    console.log(e.target);
-    const name = e.target.name;
-    const value = e.target.value;
-    console.log(`${name}: ${value}`);
-    setUserData({ ...userData, error: false, [name]: value });
-  };
+  const { id } = userData;
+  console.log("3333333333333333", id);
+
+  // const handleChange = (e) => {
+  //   console.log(e.target);
+  //   const name = e.target.name;
+  //   const value = e.target.value;
+  //   console.log(`${name}: ${value}`);
+  //   setUserData({ ...userData, error: false, [name]: value });
+  // };
+
+  
+
+
+
+  // const preload2 = async (id) => {
+  //   const data = await axios.delete(
+  //     `http://localhost:4002/user/editdelete/${params.id}`
+  //   );
+  //   console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@2",data);
+  //   console.log(data.data.data);
+  //   console.log(data.data.data.data); /* Result we want */
+  //   if (data.data.status == 400) {
+  //     toast.error(data.data.message);
+  //   } else {
+  //     console.log("data deleted successfully.");
+  //   }
+  // };
+
+  async function save() {
+    await fetch(`http://localhost:4002/user/editdelete/` + params.id, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    }).then((result) => {
+      result.json().then((resq) => {
+        console.log("This is resq ", resq);
+        // if (resq.data.status === 400) {
+        //   return toast.error(resq.data.message, {
+        //     position: toast.POSITION.TOP_CENTER,
+        //   });
+        // }
+        // if (resq.statusCode === 200) {
+        //   toast.success(resq.data.message, {
+        //     position: toast.POSITION.TOP_CENTER,
+        //   });
+        //   console.log("DATA DELETED SUCESSFULLY");
+        // } else if (resq.data.status === "failed") {
+        //   toast.error(resq.data.message, {
+        //     position: toast.POSITION.TOP_CENTER,
+        //   });
+        // }
+      });
+    });
+  }
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
-
-    allocatedDepartment.map(async (DeptName, index) => {
+    console.log("INSIDE MAP", allocatedEducation);
    
-      await addEmployee({
+    save();
+    allocatedDepartment.map(async (DeptName, index) => {
+      console.log("LOOOOOOP", DeptName);
+      await editEmployee({
         DeptName,
-        email,
+        id,
       }).then((data) => {
         console.log(data);
         if (data.data.status == 400) {
           // toast.error(data.data.message);
         } else if (data.data.status == 200) {
           // toast.success(data.data.message);
-         
+          console.log("DEPARTMENT ADDED&&&&&&&&&&&&&&&&&&&&&&&&");
         }
       });
     });
 
     allocatedEducation.map(async (eduName, index) => {
-      
-      await addEmployee({
-        email,
+      console.log("LOOOOOOP", eduName);
+      await editEmployee({
+        id,
         eduName,
       }).then((data) => {
-       
         console.log(data);
         if (data.data.status == 400) {
           // toast.error(data.data.message);
@@ -95,7 +143,7 @@ const AddEmployeePage2 = () => {
           });
         } else if (data.data.status == 200) {
           // toast.success(data.data.message);
-         
+          console.log("EDUCATION ADDED&&&&&&&&&&&&&&&&&&&&&&&&");
           setUserData({
             ...userData,
             success: true,
@@ -105,10 +153,10 @@ const AddEmployeePage2 = () => {
     });
 
     allocatedSalary.map(async (salaryType, index) => {
-      
-      await addEmployee({
+      console.log("LOOOOOOP", salaryType);
+      await editEmployee({
         salaryType,
-        email,
+        id,
       }).then((data) => {
         console.log(data);
         if (data.data.status == 400) {
@@ -116,8 +164,8 @@ const AddEmployeePage2 = () => {
         } else if (data.data.status == 200) {
           toast.success(data.data.message);
           setTimeout(() => {
-            navigate("/Employee");
-          }, 2000);
+            navigate(`/employee`);
+          }, 3000);
         }
       });
     });
@@ -189,7 +237,8 @@ const AddEmployeePage2 = () => {
     preload();
   }, []);
 
- 
+  //   FIXME: checkbox for TODO:EDUCATION
+  // Add/Remove checked item from list
   const handleCheck = (event) => {
     var updatedList = [...allocatedEducation];
 
@@ -203,12 +252,12 @@ const AddEmployeePage2 = () => {
 
   const checkedItems = allocatedEducation.length
     ? allocatedEducation.reduce((total, item) => {
-       
+        // return total + ", " + item.eduName;
         return total + ", " + item;
       })
     : "";
 
-
+  // Return classes based on whether item is checked
 
   var isChecked = (item) =>
     allocatedEducation.includes(item) ? "checked-item" : "not-checked-item";
@@ -230,7 +279,7 @@ const AddEmployeePage2 = () => {
 
   const checkedItemsDepartment = allocatedDepartment.length
     ? allocatedDepartment.reduce((total, item) => {
-        
+        // return total + ", " + item.eduName;
         return "," + total + ", " + item;
       })
     : "";
@@ -253,7 +302,7 @@ const AddEmployeePage2 = () => {
 
   const checkedItemsSalary = allocatedSalary.length
     ? allocatedSalary.reduce((total, item) => {
-       
+        // return total + ", " + item.eduName;
         return total + ", " + item;
       })
     : "";
@@ -265,8 +314,8 @@ const AddEmployeePage2 = () => {
   return (
     <>
       <SideBar />
-      <Container style={{ padding: "40px", marginLeft: "235px" }}>
-        <form className="form1" onSubmit={handleSubmit}>
+      <Container style={{ width: "85%", marginLeft: "250px" }}>
+        <form className="form" onSubmit={handleSubmit}>
           <h3> Add Employee</h3>
           {/* EMAIL */}
 
@@ -277,19 +326,19 @@ const AddEmployeePage2 = () => {
             name="email"
             value={userData.email}
             onChange={handleChange}
-          /> */}
-          <br />
+          />
+          <br /> */}
 
           <div className="form-center">
             <div className="checkList">
               <h3
-                className="title1"
-               
+                className="title"
+                style={{ marginLeft: "-40px", marginBottom: "-500px" }}
               >
                 Education Qualification
               </h3>
               <div className="list-container">
-                
+                {console.log("THIS", educationQualification)}
 
                 {educationQualification.map((item, index) => {
                   console.log(item);
@@ -368,7 +417,7 @@ const AddEmployeePage2 = () => {
                         {item.salaryType}
                       </span>
                     </div>
-                  ); 
+                  );
                 })}
 
                 <div>{`Items checked are: ${checkedItemsSalary}`}</div>
@@ -379,10 +428,10 @@ const AddEmployeePage2 = () => {
 
             <button
               type="submit"
-              style={{backgroundColor:"blue", color:"white",fontSize:"20px",padding:"10px 40px",borderRadius:"30px"}}
+              className="btn btn-block changes"
               onClick={handleSubmit}
             >
-              Save 
+              Save and Continue
             </button>
           </div>
         </form>
@@ -391,4 +440,4 @@ const AddEmployeePage2 = () => {
   );
 };
 
-export default AddEmployeePage2;
+export default EditEmployee2;

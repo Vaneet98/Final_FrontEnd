@@ -55,6 +55,9 @@ import Block from "./components/Table/Qualifiaction/Block";
 import Unblock from "./components/Table/Qualifiaction/Unblock";
 import EduView from "./components/ViewTableDetail/EmpView.js/EduView";
 import SalaryView from "./components/ViewTableDetail/EmpView.js/SalaryView";
+// import { editEmployee } from "./helper/EmployeeHelper/EmployeeApiCall";
+import EditEmployee2 from "./pages/EditEmployee/EditEmployee2";
+import EditEmployee1 from "./pages/EditEmployee/EditEmployee1";
 //  import { useCookies } from "react-cookie";
 function App() {
   // const [cookies, setCookie] = useCookies(["user"]);
@@ -124,6 +127,11 @@ function App() {
         <Route path="/QualificationBlock" element={<Protected Cmp={Block} />} />
         <Route path="/QualificationUnBlock" element={<Protected Cmp={Unblock} />} />
 
+
+
+            {/* Edit user */}
+            <Route path="/useredit1/:id" element={<Protected Cmp={EditEmployee1} />} />
+            <Route path="/useredit2/:id" element={<Protected Cmp={EditEmployee2} />} />
  {/* <Route path="/addAdmin" element={<Protected Cmp= {Dashboard} />} /> */}
 {/* 
           <Route path="/profile" element={<Protected Cmp={ProfilePwd} />} />

@@ -51,3 +51,45 @@ export const addEmployee = async (user) => {
       console.log(error);
     });
 };
+
+
+
+export const editEmployee = async (user) => {
+  //   console.log(API);
+  console.log(user);
+  return await fetch(`http://localhost:4002/user/editUser/${user.id}`, {
+    method: "PUT",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(user),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const deleteEmployee = async (user) => {
+  //   console.log(API);
+  console.log(user);
+  return await fetch(`http://localhost:4002/user/editdelete/${user.id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify(user),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

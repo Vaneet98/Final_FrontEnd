@@ -30,13 +30,15 @@ function Login() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(`${name}-${value}`);
-    setCookie("email", email, { path: "/" });
-    setCookie("password", password, { path: "/" });
+    // setCookie("email", email, { path: "/" });
+    // setCookie("password", password, { path: "/" });
     setValues({
       ...values,
       [name]: value,
     });
   };
+
+  const [cookie, setCookie, removeCookie] = useCookies([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -45,6 +47,13 @@ function Login() {
       console.log("Please Fill out all the Fields");
       return toast.error("Please Fill out all the Fields");
     }
+    if (checkbox === true) {
+      setCookie("email", email);
+      setCookie("password", password);
+      // removeCookie("email", { maxAge: 600 });
+      // removeCookie("password", { maxAge: 600 });
+    }
+    console.log("emailcookie", cookie.email);
   };
 
   const { email, password } = values;
@@ -93,19 +102,20 @@ function Login() {
     console.log(result);
   }
 
-  
-
-
-
-  const [cookies, setCookie] = useCookies(["user"]);
-
-  const handle = () => {
-    setCookie("email", email, { path: "/" });
-    setCookie("password", password, { path: "/" });
+  const [checkbox, setCheckbox] = useState(false);
+  const handleCheckChange = (e) => {
+    setCheckbox(e.target.checked);
   };
 
-  const emailed= cookies.email;
-  console.log("This is sidevbar cookies check",emailed)
+
+
+
+  // const handle = () => {
+  //   setCookie("email", email, { path: "/" });
+  //   setCookie("password", password, { path: "/" });
+  // };
+
+ 
   return (
     <Container
       id="container"
@@ -132,10 +142,7 @@ function Login() {
             onChange={handleChange}
             // onChange={handle}
             name="email"
-            // value={
-            //   cookies.email ? (values.email = cookies.email) : values.email
-            // }
-            value={values.email}
+            value={cookie.email ? (values.email = cookie.email) : values.email}
           />
           <p style={{ color: "red", fontWeight: "bold" }}>{formErrors.email}</p>
         </Form.Group>
@@ -148,12 +155,12 @@ function Login() {
             type="password"
             placeholder="Password"
             name="password"
-            // value={
-            //   cookies.password
-            //     ? (values.password = cookies.password)
-            //     : values.password
-            // }
-            value={values.password}
+            value={
+              cookie.password
+                ? (values.password = cookie.password)
+                : values.password
+            }
+            // value={values.password}
           />
           <p style={{ color: "red", fontWeight: "bold" }}>
             {formErrors.password}
@@ -165,10 +172,11 @@ function Login() {
           <div className="col">
             <input
               type="checkbox"
-              onChange={handleChange}  
+              onChange={handleCheckChange}  
               name="checkbox"
               // checked={cookies.email?"true" : "false"}     
-             value={cookies.email?values.checked:values.checkbox}
+             value={checkbox}
+             defaultChecked={cookie.email ? true : false}
               // onClick={handle}
             />
             <label htmlFor="" >

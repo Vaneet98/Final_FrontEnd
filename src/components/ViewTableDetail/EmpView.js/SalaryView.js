@@ -6,8 +6,8 @@ import Card from "react-bootstrap/Card";
 import Table from "react-bootstrap/Table";
 import { AiOutlineLeft } from "react-icons/ai";
 
-
-function EduView() {
+ 
+function SalaryView() {
   const params = useParams();
   const [user, setUser] = useState([]);
   const [department1, setDeparment1] = useState([]);
@@ -129,4 +129,4 @@ function EduView() {
   );
 };
 
-export default EduView;
+export default SalaryView;

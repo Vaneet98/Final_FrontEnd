@@ -1,27 +1,41 @@
-import React, { useState } from "react";
-
+import React, { useState,useEffect } from "react";
+import axios from "axios"
 // Toast
 import { toast } from "react-toastify";
 import { Container } from "react-bootstrap";
 
-// Components
-// import { FormRow } from "../../../components";
-
-// CSS 
-// import Wrapper from "../../../assets/wrappers/DashboardFormPage";
 import SideBar from "../../components/Sidebar/SideBar";
 
 // React Router
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 // API
-import { addEmployee } from "../../helper/EmployeeHelper/EmployeeApiCall";
+import { editEmployee } from "../../helper/EmployeeHelper/EmployeeApiCall";
 
-const AddEmployeePage = () => {
+const EditEmployee1 = () => {
   // navigate
   const navigate = useNavigate();
+  const params = useParams();
+
+  const [admin, setAdmin] = useState([]);
+  const getAdmin = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:4002/user/list/" + params.id
+      );
+      console.log("Admiiinview",response)
+      setAdmin(response.data.data.user);
+
+    } catch (error) {
+      console.log(error);
+    }
+  }; 
+  useEffect(() => { 
+    getAdmin();
+  }, []);
 
   const [userData, setUserData] = useState({
+    id: params.id,
     email: "",
     name: "",
     DOB: "",
@@ -41,19 +55,19 @@ const AddEmployeePage = () => {
     console.log(`${name}: ${value}`);
     setUserData({ ...userData, error: false, [name]: value });
   };
+  localStorage.setItem("USER_EMAIL", email);
+  console.log("555555555555555********", email);
 
-  localStorage.setItem("User_Email",email)
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { email, name, DOB, DateOfJoining, gender, address } = userData;
-
+    const { id, email, name, DOB, DateOfJoining, gender, address } = userData;
     if ((!email, !name, !DOB, !DateOfJoining, !gender || !address)) {
       console.log("Please Fill out all the Fields");
       return toast.error("Please Fill out all the Fields");
     }
 
-    addEmployee({ email, name, DOB, DateOfJoining, gender, address }).then(
+    editEmployee({ id, email, name, DOB, DateOfJoining, gender, address }).then(
       (data) => {
         console.log(data);
         if (data.data.status == 400) {
@@ -68,15 +82,14 @@ const AddEmployeePage = () => {
             ...userData,
             success: true,
           });
-          // toast.success(data.data.message);
-          toast.success("Save and Continue");
+          toast.success(data.data.message);
 
-          setTimeout(() => { 
-            navigate("/addEmployee2");
+          setTimeout(() => {
+            navigate(`/useredit2/${id}`);
           }, 3000);
         }
-      } 
-    ); 
+      }
+    );
   };
 
   return (
@@ -90,40 +103,52 @@ const AddEmployeePage = () => {
             {/* NAME */}
             <label>Name</label>
             <br />
+            <br />
             <input
               type="text"
               name="name"
+              placeholder={admin.name}
               value={userData.name}
               onChange={handleChange}
               style={{ width: "70%" }}
             />{" "}
+            <br />
             <br />
             <label>Email</label>
             <br />
             <input
               type="email"
               name="email"
+              placeholder={admin.email}
               value={userData.email}
               onChange={handleChange}
+              style={{ width: "70%" }}
             />
+            <br />
             <br />
             <label>DOB</label>
             <br />
             <input
               type="date"
               name="DOB"
+              placholder={admin.DOB}
               value={userData.DOB}
               onChange={handleChange}
+              style={{ width: "70%" }}
             />{" "}
+            <br />
             <br />
             <label>Date Of Joining</label>
             <br />
             <input
               type="date"
               name="DateOfJoining"
+              placeholder={admin.DateOfJoining}
               value={userData.DateOfJoining}
               onChange={handleChange}
+              style={{ width: "70%" }}
             />{" "}
+            <br />
             <br />
             <label>Gender</label>
             <br />
@@ -131,18 +156,24 @@ const AddEmployeePage = () => {
             <input
               type="text"
               name="gender"
+              placeholder={admin.gender}
               value={userData.gender}
               onChange={handleChange}
+              style={{ width: "70%" }}
             />{" "}
+            <br />
             <br />
             <label>Address</label>
             <br />
             <input
               type="text"
               name="address"
+              placeholder={admin.address}
               value={userData.address}
               onChange={handleChange}
+              style={{ width: "70%" }}
             />{" "}
+            <br />
             <br />
             <button
               type="submit"
@@ -152,7 +183,7 @@ const AddEmployeePage = () => {
                 backgroundColor: "black",
                 fontSize: "20px",
                 color: "#ffffff",
-                width: "80%",
+                width: "70%",
               }}
             >
               Save and Continue
@@ -164,4 +195,4 @@ const AddEmployeePage = () => {
   );
 };
 
-export default AddEmployeePage;
+export default EditEmployee1;

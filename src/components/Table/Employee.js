@@ -112,9 +112,9 @@ const Employee = () => {
   const colunms = [
     {
       name: (
-        <h5>
+        <h6>
           <b>Emp_ID</b>
-        </h5>
+        </h6>
       ),
       selector: (row) => row.id,
       sortable: true,
@@ -122,9 +122,9 @@ const Employee = () => {
 
     {
       name: (
-        <h5>
+        <h6>
           <b>Employee Name</b>
-        </h5>
+        </h6>
       ),
       selector: (row) => row.name,
       sortable: true,
@@ -132,9 +132,9 @@ const Employee = () => {
 
     {
       name: (
-        <h5>
+        <h6>
           <b>Employee Email</b>
-        </h5>
+        </h6>
       ),
       selector: (row) => row.email,
       sortable: true,
@@ -142,9 +142,9 @@ const Employee = () => {
 
     {
       name: (
-        <h5>
+        <h6>
           <b>Department Allocated-1</b>
-        </h5>
+        </h6>
       ),
       selector: (row) => row.employeeDepts[0]?.DeptName,
       sortable: true,
@@ -152,9 +152,9 @@ const Employee = () => {
 
     {
       name: (
-        <h5>
+        <h6>
           <b>Department Allocated-2</b>
-        </h5>
+        </h6>
       ),
       selector: (row) => row.employeeDepts[1]?.DeptName,
       sortable: true,
@@ -162,64 +162,19 @@ const Employee = () => {
 
     {
       name: (
-        <h5>
+        <h6>
           <b>Department Allocated-3</b>
-        </h5>
+        </h6>
       ),
       selector: (row) => row.employeeDepts[2]?.DeptName,
       sortable: true,
     },
 
-    // {
-    //   name: (
-    //     <h5>
-    //       <b>Education Qualification-1</b>
-    //     </h5>
-    //   ),
-    //   selector: (row) => row.employeeDepts[0]?.employeeEdus[0]?.eduName,
-    //   sortable: true,
-    // },
-
-    // {
-    //   name: (
-    //     <h5>
-    //       <b>Education Qualification-2</b>
-    //     </h5>
-    //   ),
-    //   selector: (row) => row.employeeDepts[0]?.employeeEdus[1]?.eduName,
-    //   sortable: true,
-    // },
-
-    // {
-    //   name: (
-    //     <h5>
-    //       <b>Education Qualification-3</b>
-    //     </h5>
-    //   ),
-    //   selector: (row) => row.employeeDepts[0]?.employeeEdus[2]?.eduName,
-    //   sortable: true,
-    // },
-
-    // {
-    //   name: (
-    //     <h5>
-    //       <b>Salary Allocated</b>
-    //     </h5>
-    //   ),
-    //   selector: (row) =>
-    //     row.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[0]
-    //       ?.salaryType ||
-    //     row.employeeDepts[0]?.employeeEdus[0]?.employeeSalaries[1]
-    //       ?.salaryType ||
-    //     row.employeeDepts[0]?.employeeEdus[1]?.employeeSalaries[0]?.salaryType,
-    //   //  row.employeeDepts[0]?.employeeEdus[0]?.eduName
-    //   sortable: true,
-    // },
     {
       name: (
-        <h5>
+        <h6>
           <b>Edu_Detail</b>
-        </h5>
+        </h6>
       ),
       cell: (row) => (
         <div
@@ -239,9 +194,9 @@ const Employee = () => {
     },
     {
       name: (
-        <h5>
-          <b>Salary_Details</b>
-        </h5>
+        <h6>
+          <b>Sal_Details</b>
+        </h6>
       ),
       cell: (row) => (
         <div
@@ -273,7 +228,7 @@ const Employee = () => {
             width: "110px",
           }}
         >
-          <button onClick={()=>navigate(`/edit/${row.id} `)} style={{ border: "none",backgroundColor:"white" }}>
+          <button onClick={()=>navigate(`/useredit1/${row.id} `)} style={{ border: "none",backgroundColor:"white" }}>
             {" "}
             <i className="fa-solid fa-pen fa-lg"style={{color:"blue",backgroundColor:"white"}}></i>
           </button> 
